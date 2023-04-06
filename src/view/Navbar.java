@@ -2,25 +2,55 @@ package view;
 
 import config.Config;
 import controller.UserController;
+import modal.Role;
 import modal.User;
+
+import java.sql.SQLOutput;
 
 public class Navbar {
     UserController userController = new UserController();
+
     public Navbar() {
         User user = userController.getUserLogin();
-        if(user!=null){
-            System.out.println("WELCOME "+user.getRoles()+user.getName());
-            System.out.println("1. GO TO PROFILE");
-            int chooseMenu = Config.scanner().nextInt();
-            switch (chooseMenu){
-                case 1:
-                    new ProfileView();
-                    break;
-                case 2:
-                    new Navbar();
-                    break;
+        String roleName="";
+        if (user != null) {
+            for (Role role: user.getRoles()
+                 ) {roleName= String.valueOf(role.getName());
             }
-        }else {
+             if (roleName.equalsIgnoreCase("user")){
+                System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                System.out.println("1. CHANGE PROFILE");
+                System.out.println("2. CHANGE PASSWORD");
+                System.out.println("3. SONG MANAGE");
+                System.out.println("4. PLAYLIST MANAGE");
+                System.out.println("5. LOGOUT");
+                 System.out.println("Enter your choose:");
+                int chooseMenu = Config.scanner().nextInt();
+                switch (chooseMenu) {
+                    case 1:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new ProfileView().changeProfile();
+                        break;
+                    case 2:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new ProfileView().changePassword();
+                        break;
+                    case 3:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new ProfileView().manageSong();
+                        break;
+                    case 4:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new ProfileView().playlistManage();
+                        break;
+                }
+                } else if (roleName.equalsIgnoreCase("PM")){
+                 System.out.println("PM");
+             }else {
+                 System.out.println("Admin");
+             }
+
+        } else {
             System.out.println("WELCOME TO WEBSITE MUSIC");
             System.out.println("==========================");
             System.out.println("1. LIST SINGER");
@@ -32,7 +62,7 @@ public class Navbar {
             System.out.println("7. LOGIN");
             System.out.println("Enter your choose");
             int chooseMenu = Config.scanner().nextInt();
-            switch (chooseMenu){
+            switch (chooseMenu) {
                 case 1:
                     new GuestView().showListSinger();
                     break;
@@ -46,7 +76,7 @@ public class Navbar {
                     new GuestView().showListSong();
                     break;
                 case 5:
-
+                    new GuestView().showAllPlaylist();
                     break;
                 case 6:
                     new UserView().formRegister();

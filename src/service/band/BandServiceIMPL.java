@@ -8,19 +8,15 @@ import java.util.List;
 
 public class BandServiceIMPL implements IBandService {
     public static List<Band> listOfBand = new ArrayList<>();
-    public static List<Song> songList = new ArrayList<>();
+
+
     static {
-        songList.add(new Song(0,"Mua"));
-        songList.add(new Song(1,"nang"));
+        listOfBand.add(new Band(0, "AAA", new ArrayList<>()));
+        listOfBand.add(new Band(1, "BBB", new ArrayList<>()));
+        listOfBand.add(new Band(2, "CCC", new ArrayList<>()));
 
     }
 
-    static {
-        listOfBand.add(new Band(0, "AAA", songList));
-        listOfBand.add(new Band(1, "BBB", songList));
-        listOfBand.add(new Band(2, "CCC", songList));
-
-    }
 
     @Override
     public List<Band> findAll() {

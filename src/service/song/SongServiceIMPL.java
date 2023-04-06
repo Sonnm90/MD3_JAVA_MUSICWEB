@@ -1,10 +1,7 @@
 package service.song;
 
 import config.Config;
-import modal.Band;
-import modal.Category;
-import modal.Singer;
-import modal.Song;
+import modal.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +13,8 @@ public class SongServiceIMPL implements ISongService {
     public static List<Band> bands = new ArrayList<>();
 
     static {
-        songList.add(new Song(0,"Mua",singers,new Category(1,"nhac tre"),bands,null,0,0));
-        songList.add(new Song(1,"Buon",singers,new Category(1,"nhac tre"),bands,null,0,0));
+        songList.add(new Song(0,"Mua",singers,new Category(1,"nhac tre"),bands,new User(0,"huy"),0,new ArrayList<>()));
+        songList.add(new Song(1,"Buon",singers,new Category(1,"nhac tre"),bands,new User(10,"son"),0,new ArrayList<>()));
 
     }
 

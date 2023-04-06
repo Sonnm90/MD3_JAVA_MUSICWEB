@@ -21,16 +21,45 @@ public class UserView {
         } else {
             id = userList.get(userList.size()-1).getId()+1;
         }
-        System.out.println("Enter the name: ");
-        String name = Config.scanner().nextLine();
-        System.out.println("Enter the username: ");
-        String username = Config.scanner().nextLine();
-        System.out.println("Enter the email: ");
-        String email = Config.scanner().nextLine();
-        System.out.println("Enter the password: ");
-        String password = Config.scanner().nextLine();
-        System.out.println("Enter the role: ");
-        String role = Config.scanner().nextLine();
+        String name,username,email,password;
+        while (true) {
+            System.out.println("Enter the name: ");
+             name = Config.scanner().nextLine();
+            if (Config.validateName(name)){
+                break;
+            } else {
+                new ResponseMessage("Please enter again");
+            }
+        }
+        while (true) {
+            System.out.println("Enter the username: ");
+             username = Config.scanner().nextLine();
+            if (Config.validateUsername(username)){
+                break;
+            } else {
+                new ResponseMessage("Please enter again");
+            }
+        }
+        while (true) {
+            System.out.println("Enter the email: ");
+             email = Config.scanner().nextLine();
+            if (Config.validateEmail(email)){
+                break;
+            } else {
+                new ResponseMessage("Please enter again");
+            }
+        }
+        while (true) {
+            System.out.println("Enter the password: ");
+             password = Config.scanner().nextLine();
+            if (Config.validatePassword(password))
+                break;
+            else
+                new ResponseMessage("Please enter again");
+        }
+//        System.out.println("Enter the role: ");
+//        String role = Config.scanner().nextLine();
+        String role ="user";
         Set<String> strRole = new HashSet<>();
         strRole.add(role);
         SignUpDTO sign = new SignUpDTO(id,name,username,email,password,strRole);

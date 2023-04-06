@@ -4,10 +4,19 @@ import config.Config;
 import modal.Singer;
 import modal.Song;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SingerServiceIMPL implements ISingerService {
-    List<Singer> singerList = new Config<Singer>().readFromFile(Config.PATH_SINGER);
+//    List<Singer> singerList = new Config<Singer>().readFromFile(Config.PATH_SINGER);
+    public  static  List<Singer> singerList = new ArrayList<>();
+    static {
+        singerList.add(new Singer(0,"Minh Thu",new ArrayList<>()));
+        singerList.add(new Singer(1,"Minh Vuong",new ArrayList<>()));
+        singerList.add(new Singer(2,"Minh Huy",new ArrayList<>()));
+
+
+    }
     @Override
     public List<Singer> findAll() {
         return singerList;

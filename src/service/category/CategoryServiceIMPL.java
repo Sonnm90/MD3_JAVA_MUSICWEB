@@ -3,10 +3,16 @@ package service.category;
 import config.Config;
 import modal.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryServiceIMPL implements ICategoryService {
-    List<Category> categoryList = new Config<Category>().readFromFile(Config.PATH_CATEGORY);
+//    List<Category> categoryList = new Config<Category>().readFromFile(Config.PATH_CATEGORY);
+    public static List<Category> categoryList = new ArrayList<>();
+    static {
+        categoryList.add(new Category(0,"Nhac tre"));
+        categoryList.add(new Category(1,"Nhac vang"));
+    }
 
     @Override
     public List<Category> findAll() {

@@ -12,13 +12,13 @@ public class Song implements Serializable {
     private List<Band> bands;
     private User user;
     private int numberOfView;
-    private int numberOfLike;
+    private List<User> likeUsers=new ArrayList<>();
     private List<Comment> comments;
 
     public Song() {
     }
 
-    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, int numberOfLike, List<Comment> comments) {
+    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, List<User> likeUsers, List<Comment> comments) {
         this.id = id;
         this.name = name;
         this.singers = singers;
@@ -26,11 +26,20 @@ public class Song implements Serializable {
         this.bands = bands;
         this.user = user;
         this.numberOfView = numberOfView;
-        this.numberOfLike = numberOfLike;
+        this.likeUsers = likeUsers;
         this.comments = comments;
     }
 
-    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, int numberOfLike) {
+    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user) {
+        this.id = id;
+        this.name = name;
+        this.singers = singers;
+        this.category = category;
+        this.bands = bands;
+        this.user = user;
+    }
+
+    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, List<User> likeUsers) {
         this.id = id;
         this.name = name;
         this.singers = singers;
@@ -38,7 +47,7 @@ public class Song implements Serializable {
         this.bands = bands;
         this.user = user;
         this.numberOfView = numberOfView;
-        this.numberOfLike = numberOfLike;
+        this.likeUsers = likeUsers;
     }
 
     public Song(int id, String name) {
@@ -46,12 +55,12 @@ public class Song implements Serializable {
         this.name = name;
     }
 
-    public int getNumberOfLike() {
-        return numberOfLike;
+    public List<User> getLikeUsers() {
+        return likeUsers;
     }
 
-    public void setNumberOfLike(int numberOfLike) {
-        this.numberOfLike = numberOfLike;
+    public void setLikeUsers(List<User> likeUsers) {
+        this.likeUsers = likeUsers;
     }
 
     public int getId() {
@@ -128,7 +137,7 @@ public class Song implements Serializable {
                 ", bands=" + bands +
                 ", user=" + user +
                 ", numberOfView=" + numberOfView +
-                ", numberOfLike=" + numberOfLike +
+                ", numberOfLike=" + likeUsers.size() +
                 ", comments=" + comments +
                 '}';
     }

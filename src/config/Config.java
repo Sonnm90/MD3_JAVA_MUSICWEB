@@ -65,7 +65,7 @@ public class Config<T> {
         }
     }
 
-    public boolean validateName(String name) {
+    public static boolean validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
             System.out.println("Tên không được để trống.");
             return false;
@@ -76,7 +76,7 @@ public class Config<T> {
         }
         return true;
     }
-    public boolean validateUsername(String username) {
+    public static boolean validateUsername(String username) {
         if (username == null || username.trim().isEmpty()) {
             System.out.println("Tên đăng nhập không được để trống.");
             return false;
@@ -92,13 +92,13 @@ public class Config<T> {
         return true;
     }
 
-    public boolean validateEmail(String email) {
+    public static boolean validateEmail(String email) {
         if (email == null || email.isEmpty()) {
             return false;
         }
 
         // Định dạng chuẩn của địa chỉ email
-        String emailRegex = "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
+        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
         // Kiểm tra định dạng của email
         if (!email.matches(emailRegex)) {

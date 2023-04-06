@@ -56,4 +56,7 @@ public class UserController {
     public User getUserLogin(){
         return userService.getCurentUser();
     }
+    public void createUser(User user){
+        userService.save(user);
+    }
 }

@@ -106,7 +106,7 @@ public class Navbar {
                 System.out.println("6. SHOW ALL SONG");
                 System.out.println("7. BAND MANAGEMENT");
                 System.out.println("8. SINGER MANAGEMENT");
-                System.out.println("9. CATEGORY MANAGMENT");
+                System.out.println("9. CATEGORY MANAGEMENT");
                 System.out.println("10. LOGOUT");
                 System.out.println("Enter your choose:");
                 int chooseMenu = Config.scanner().nextInt();

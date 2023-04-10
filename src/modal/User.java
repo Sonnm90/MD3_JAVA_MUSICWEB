@@ -16,6 +16,7 @@ public class User implements Serializable {
     private List<PlayList> playLists;
     private Set<Role> roles = new HashSet<>();
 
+
     public User() {
     }
 

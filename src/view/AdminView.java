@@ -367,6 +367,59 @@ public class AdminView {
     }
 
     public void deleteSongOfPlaylist() {
+        for (int i = 0; i < playLists.size(); i++) {
+            System.out.println(playLists.get(i));
+        }
+        while (true) {
+            System.out.println("Enter Id of Playlist to delete Song or anu char to back previewMenu");
+            String back = Config.scanner().nextLine();
+            if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                playlistManage();
+            } else {
+                int idUpdate = Integer.parseInt(back);
+                boolean check = false;
+                for (int i = 0; i < playLists.size(); i++) {
+                    if (playLists.get(i).getId() == idUpdate) {
+                        check = true;
+                    }
+                }
+                if (check) {
+                    PlayList updatePlaylist = playListController.detailPlaylist(idUpdate);
+                    for (Song song : updatePlaylist.getPlaylistSongs()
+                    ) {
+                        System.out.println(song);
+                    }
+                    System.out.println("Enter Id of Song to delete or anu char to back previewMenu");
+                    String choice = Config.scanner().nextLine();
+                    if (choice == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                        deleteSongOfPlaylist();
+                    } else {
+                        boolean checkSong = false;
+                        int choiceSong = Integer.parseInt(choice);
+                        for (int i = 0; i < updatePlaylist.getPlaylistSongs().size(); i++) {
+                            if (updatePlaylist.getPlaylistSongs().get(i).getId() == choiceSong) {
+                                checkSong = true;
+                                break;
+                            }
+                        }
+                        if (check){
+                            updatePlaylist.getPlaylistSongs().remove(choiceSong);
+                        }
+                        playListController.updatePlaylist(updatePlaylist);
+                        System.out.println("Delete Success");
+                        System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                        String backMenu = Config.scanner().nextLine();
+                        if (backMenu.equalsIgnoreCase("back")) {
+                            new Navbar();
+                        } else {
+                            playlistManage();
+                        }
+                    }
+                } else {
+                    System.out.println("Id not found!");
+                }
+            }
+        }
 
     }
 
@@ -453,6 +506,13 @@ public class AdminView {
                 }
                 if (!check) {
                     System.out.println("Id not found! Please try again");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        playlistManage();
+                    }
                 } else {
                     break;
                 }
@@ -474,6 +534,13 @@ public class AdminView {
                     break;
                 } else {
                     System.out.println("Id not found! Please try again.");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        playlistManage();
+                    }
                 }
             }
             List<Song> listUpdate = updatePlaylist.getPlaylistSongs();

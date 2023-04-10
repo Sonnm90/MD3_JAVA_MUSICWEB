@@ -39,4 +39,7 @@ public class PlayListController {
     public void deletePlaylist(int id) {
         playListService.deleteById(id);
     }
+    public void showSongOfPlaylist(PlayList playList){
+        playListService.showSongOfPlaylist(playList);
+    }
 }

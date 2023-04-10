@@ -69,7 +69,7 @@ public class UserView {
                 System.err.println("user name existed!");
                 username = Config.scanner().nextLine();
                 sign.setUsername(username);
-                System.out.println("duoi lenh nhap");
+
             } else if(responseMessage.getMessage().equals("email_existed")){
                 System.err.println("email name existed!");
                 email = Config.scanner().nextLine();
@@ -88,11 +88,15 @@ public class UserView {
         System.out.println("Enter your password: ");
         String password = Config.scanner().nextLine();
         SignInDTO signInDTO = new SignInDTO(username,password);
+        int count =0;
         while (true) {
+            if (count==5){
+                new Navbar();
+            }
             ResponseMessage responseMessage = userController.login(signInDTO);
             if(responseMessage.getMessage().equals("login_failed")){
                 System.err.println("Login failed! Please check your account!");
-                System.out.println("Enter your username: ");
+                System.out.println("Enter your username or: ");
                 username = Config.scanner().nextLine();
                 System.out.println("Enter your password: ");
                 password = Config.scanner().nextLine();
@@ -103,6 +107,7 @@ public class UserView {
                 new Navbar();
                 break;
             }
+            count++;
         }
     }
     public void showListUser(){
@@ -113,4 +118,5 @@ public class UserView {
             new Navbar();
         }
     }
+
 }

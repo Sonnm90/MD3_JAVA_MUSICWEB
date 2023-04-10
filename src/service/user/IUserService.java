@@ -8,4 +8,5 @@ public interface IUserService extends IGenericService<User> {
     boolean existedByEmail(String email);
     boolean checkLogin(String username, String password);
     User getCurentUser();
+    void logOutUser();
 }

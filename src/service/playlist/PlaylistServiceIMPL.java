@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlaylistServiceIMPL implements IPlayListService {
-//    List<PlayList> playLists = new Config<PlayList>().readFromFile(Config.PATH_PLAYLIST);
-    public static List<PlayList> playLists = new ArrayList<>();
-    static {
-        playLists.add(new PlayList(0,"noi buon vo tan",new ArrayList<>(),new User(20,"vuong"),false));
-        playLists.add(new PlayList(0,"noi buon co  han",new ArrayList<>(),new User(20,"vuong"),false));
-
-    }
+    List<PlayList> playLists = new Config<PlayList>().readFromFile(Config.PATH_PLAYLIST);
+//    public static List<PlayList> playLists = new ArrayList<>();
+//    static {
+//        playLists.add(new PlayList(0,"noi buon vo tan",new ArrayList<>(),new User(20,"vuong"),false));
+//        playLists.add(new PlayList(1,"noi buon co  han",new ArrayList<>(),new User(20,"vuong"),false));
+//
+//    }
     List<Song> songList =new Config<Song>().readFromFile(Config.PATH_SONG);
 
     @Override
@@ -70,8 +70,8 @@ public class PlaylistServiceIMPL implements IPlayListService {
         for (int i = 0; i < playLists.size(); i++) {
             if (playList.getId()==playLists.get(i).getId()){
                 for (int j = 0; j < songList.size(); j++) {
-                    if (songList.get(i).getId()==id){
-                        playLists.get(i).getPlaylistSongs().add(songList.get(id));
+                    if (songList.get(j).getId()==id){
+                        playLists.get(i).getPlaylistSongs().add(songList.get(j));
                         new Config<PlayList>().writeToFile(Config.PATH_PLAYLIST,playLists);
                         return true;
                     }
@@ -79,6 +79,14 @@ public class PlaylistServiceIMPL implements IPlayListService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void showSongOfPlaylist(PlayList playList) {
+        for (Song song: playList.getPlaylistSongs()
+             ) {
+            System.out.println(song);
+        }
     }
 
 

@@ -9,4 +9,5 @@ import java.util.List;
 public interface IPlayListService extends IGenericService<PlayList> {
     List<PlayList> searchByName(String name);
 boolean addSongToPlaylistBySongId(PlayList playList, int id);
+public void showSongOfPlaylist(PlayList playList);
 }

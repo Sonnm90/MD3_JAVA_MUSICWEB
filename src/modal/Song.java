@@ -2,6 +2,7 @@ package modal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Song implements Serializable {
@@ -30,25 +31,25 @@ public class Song implements Serializable {
         this.comments = comments;
     }
 
-    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user) {
-        this.id = id;
-        this.name = name;
-        this.singers = singers;
-        this.category = category;
-        this.bands = bands;
-        this.user = user;
-    }
-
-    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, List<User> likeUsers) {
-        this.id = id;
-        this.name = name;
-        this.singers = singers;
-        this.category = category;
-        this.bands = bands;
-        this.user = user;
-        this.numberOfView = numberOfView;
-        this.likeUsers = likeUsers;
-    }
+//    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user) {
+//        this.id = id;
+//        this.name = name;
+//        this.singers = singers;
+//        this.category = category;
+//        this.bands = bands;
+//        this.user = user;
+//    }
+//
+//    public Song(int id, String name, List<Singer> singers, Category category, List<Band> bands, User user, int numberOfView, List<User> likeUsers) {
+//        this.id = id;
+//        this.name = name;
+//        this.singers = singers;
+//        this.category = category;
+//        this.bands = bands;
+//        this.user = user;
+//        this.numberOfView = numberOfView;
+//        this.likeUsers = likeUsers;
+//    }
 
     public Song(int id, String name) {
         this.id = id;
@@ -141,4 +142,6 @@ public class Song implements Serializable {
                 ", comments=" + comments +
                 '}';
     }
+
+
 }

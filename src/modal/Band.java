@@ -46,7 +46,7 @@ public class Band implements Serializable {
         return "Band{" +
                 "bandId=" + bandId +
                 ", bandName='" + bandName + '\'' +
-                ", songsOfBand=" + songsOfBand +
+
                 '}';
     }
 }

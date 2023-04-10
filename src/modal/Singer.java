@@ -46,7 +46,7 @@ public class Singer implements Serializable {
         return "Singer{" +
                 "singerId=" + singerId +
                 ", singerName='" + singerName + '\'' +
-                ", songsOfSinger=" + songsOfSinger +
+
                 '}';
     }
 }

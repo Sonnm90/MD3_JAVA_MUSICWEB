@@ -3,6 +3,9 @@ package service.user;
 import config.Config;
 import modal.User;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,4 +88,17 @@ public class UserServiceIMPL implements IUserService{
         }
         return null;
     }
+
+    @Override
+    public void logOutUser() {
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(Config.PATH_USER_LOGIN);
+                fileOutputStream.write(("").getBytes());
+                fileOutputStream.close();
+            } catch (FileNotFoundException f) {
+                System.err.println("File not found!");
+            } catch (IOException i) {
+                System.err.println("IOE exception!");
+            }
+        }
 }

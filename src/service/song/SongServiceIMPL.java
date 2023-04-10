@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SongServiceIMPL implements ISongService {
-//    List<Song> songList = new Config<Song>().readFromFile(Config.PATH_SONG);
-    public static List<Song> songList =new ArrayList<>();
-    public static List<Singer> singers = new ArrayList<>();
-    public static List<Band> bands = new ArrayList<>();
+    List<Song> songList = new Config<Song>().readFromFile(Config.PATH_SONG);
+//    public static List<Song> songList =new ArrayList<>();
+//    public static List<Singer> singers = new ArrayList<>();
+//    public static List<Band> bands = new ArrayList<>();
 
-    static {
-        songList.add(new Song(0,"Mua",singers,new Category(1,"nhac tre"),bands,new User(0,"huy"),0,new ArrayList<>()));
-        songList.add(new Song(1,"Buon",singers,new Category(1,"nhac tre"),bands,new User(10,"son"),0,new ArrayList<>()));
-
-    }
+//    static {
+//        songList.add(new Song(0,"Mua",singers,new Category(1,"nhac tre"),bands,new User(0,"huy"),0,new ArrayList<>()));
+//        songList.add(new Song(1,"Buon",singers,new Category(1,"nhac tre"),bands,new User(10,"son"),0,new ArrayList<>()));
+//
+//    }
 
     @Override
     public List<Song> findAll() {

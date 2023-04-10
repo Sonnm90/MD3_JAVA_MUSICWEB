@@ -65,6 +65,7 @@ public class Config<T> {
         }
     }
 
+
     public static boolean validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
             System.out.println("Tên không được để trống.");

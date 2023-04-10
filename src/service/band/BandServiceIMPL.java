@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BandServiceIMPL implements IBandService {
-    public static List<Band> listOfBand = new ArrayList<>();
+    List<Band> listOfBand = new Config<Band>().readFromFile(Config.PATH_BAND);
 
-
-    static {
-        listOfBand.add(new Band(0, "AAA", new ArrayList<>()));
-        listOfBand.add(new Band(1, "BBB", new ArrayList<>()));
-        listOfBand.add(new Band(2, "CCC", new ArrayList<>()));
-
-    }
+//    public static List<Band> listOfBand = new ArrayList<>();
+//
+//
+//    static {
+//        listOfBand.add(new Band(0, "AAA", new ArrayList<>()));
+//        listOfBand.add(new Band(1, "BBB", new ArrayList<>()));
+//        listOfBand.add(new Band(2, "CCC", new ArrayList<>()));
+//
+//    }
 
 
     @Override

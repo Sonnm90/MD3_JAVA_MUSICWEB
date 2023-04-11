@@ -193,8 +193,8 @@ public class ProfileView {
                 System.out.println(category);
             }
             System.out.println("Enter Id of Category to choose");
-            int choose = Integer.parseInt(Config.scanner().nextLine());
-            creatCategory = categoryList.get(choose);
+            int choose = InputMethods.getInteger();
+            creatCategory = categoryController.detailCategory(choose);
             if (creatCategory != null)
                 break;
         }

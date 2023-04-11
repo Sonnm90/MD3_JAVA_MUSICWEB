@@ -59,7 +59,7 @@ public class UserView {
         }
 //        System.out.println("Enter the role: ");
 //        String role = Config.scanner().nextLine();
-        String role ="user";
+        String role ="admin";
         Set<String> strRole = new HashSet<>();
         strRole.add(role);
         SignUpDTO sign = new SignUpDTO(id,name,username,email,password,strRole);

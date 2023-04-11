@@ -15,6 +15,7 @@ public class User implements Serializable {
     private List<Song> listManage;
     private List<PlayList> playLists;
     private Set<Role> roles = new HashSet<>();
+    private List<Song> myPlaylist;
 
 
     public User() {
@@ -25,7 +26,15 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public User(int id, String name, String userName, String email, String password, boolean status, List<Song> listManage, List<PlayList> playLists, Set<Role> roles) {
+    public List<Song> getMyPlaylist() {
+        return myPlaylist;
+    }
+
+    public void setMyPlaylist(List<Song> myPlaylist) {
+        this.myPlaylist = myPlaylist;
+    }
+
+    public User(int id, String name, String userName, String email, String password, boolean status, List<Song> listManage, List<PlayList> playLists, Set<Role> roles, List<Song> myPlaylist) {
         this.id = id;
         this.name = name;
         this.userName = userName;
@@ -35,7 +44,20 @@ public class User implements Serializable {
         this.listManage = listManage;
         this.playLists = playLists;
         this.roles = roles;
+        this.myPlaylist = myPlaylist;
     }
+
+//    public User(int id, String name, String userName, String email, String password, boolean status, List<Song> listManage, List<PlayList> playLists, Set<Role> roles) {
+//        this.id = id;
+//        this.name = name;
+//        this.userName = userName;
+//        this.email = email;
+//        this.password = password;
+//        this.status = status;
+//        this.listManage = listManage;
+//        this.playLists = playLists;
+//        this.roles = roles;
+//    }
 
     public User(int id, String name, String username, String email, String password, Set<Role> roleSet) {
         this.id = id;

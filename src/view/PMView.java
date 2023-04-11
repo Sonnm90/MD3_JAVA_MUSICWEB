@@ -1,6 +1,7 @@
 package view;
 
 import config.Config;
+import config.InputMethods;
 import controller.*;
 import dto.response.ResponseMessage;
 import modal.*;
@@ -32,7 +33,7 @@ public class PMView {
         System.out.println("2. Delete User");
         System.out.println("3. Back");
         System.out.println(" Enter your choice:");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 changeStatusUser();
@@ -40,8 +41,11 @@ public class PMView {
             case 2:
                 deleteUser();
                 break;
-            default:
+            case 3:
                 new Navbar();
+                break;
+            default:
+                manageUser();
         }
     }
 

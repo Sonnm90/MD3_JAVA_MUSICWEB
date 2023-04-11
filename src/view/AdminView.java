@@ -1,6 +1,7 @@
 package view;
 
 import config.Config;
+import config.InputMethods;
 import controller.*;
 import dto.response.ResponseMessage;
 import modal.*;
@@ -25,6 +26,8 @@ public class AdminView {
     List<Band> bandList = new BandController().getListBand();
     PlayListController playListController = new PlayListController();
     List<PlayList> playLists = playListController.getListPlaylist();
+    MyPlaylistController myPlaylistController = new MyPlaylistController();
+    List<MyPlaylist> myPlaylists = myPlaylistController.getListMyPlaylist();
 //    List<Song> songList = new Config<Song>().readFromFile(Config.PATH_SONG);
 //    List<Singer> singerList = new Config<Singer>().readFromFile(Config.PATH_SINGER);
 //    List<Band> bandList = new Config<Band>().readFromFile(Config.PATH_BAND);
@@ -38,7 +41,7 @@ public class AdminView {
         System.out.println("4. Delete Song");
         System.out.println("5. Back");
         System.out.println("Enter your choice");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 new ProfileView().creatSong();
@@ -54,6 +57,8 @@ public class AdminView {
                 break;
             case 5:
                 new Navbar();
+            default:
+                manageSong();
         }
 
     }
@@ -61,8 +66,7 @@ public class AdminView {
 
     public List<Song> showListSong() {
         if (songList.size() > 0) {
-            for (Song song : songList
-            ) {
+            for (Song song : songList) {
                 System.out.println(song);
             }
         } else {
@@ -229,10 +233,10 @@ public class AdminView {
         System.out.println("3. Update Playlist");
         System.out.println("4. Delete Playlist");
         System.out.println("5. Add Song to Playlist");
-        System.out.println("6. Detele Song Of Playlist");
+        System.out.println("6. Remove Song Of Playlist");
         System.out.println("7. Back!");
         System.out.println("Enter your choice");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 createPlaylist();
@@ -250,9 +254,11 @@ public class AdminView {
                 addSongToPlaylistBySongId();
                 break;
             case 6:
-                deleteSongOfPlaylist();
+                removeSongOfPlaylist();
             case 7:
                 new Navbar();
+            default:
+                playlistManage();
         }
     }
 
@@ -297,8 +303,7 @@ public class AdminView {
 
     public List<PlayList> showPlaylist() {
         if (playLists.size() > 0) {
-            for (PlayList playList : playLists
-            ) {
+            for (PlayList playList : playLists) {
                 System.out.println(playList);
             }
             System.out.println("Enter Id of Playlist to show or any char to back previewMenu");
@@ -366,7 +371,7 @@ public class AdminView {
         }
     }
 
-    public void deleteSongOfPlaylist() {
+    public void removeSongOfPlaylist() {
         for (int i = 0; i < playLists.size(); i++) {
             System.out.println(playLists.get(i));
         }
@@ -385,25 +390,26 @@ public class AdminView {
                 }
                 if (check) {
                     PlayList updatePlaylist = playListController.detailPlaylist(idUpdate);
-                    for (Song song : updatePlaylist.getPlaylistSongs()
-                    ) {
+                    for (Song song : updatePlaylist.getPlaylistSongs()) {
                         System.out.println(song);
                     }
                     System.out.println("Enter Id of Song to delete or anu char to back previewMenu");
                     String choice = Config.scanner().nextLine();
                     if (choice == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
-                        deleteSongOfPlaylist();
+                        removeSongOfPlaylist();
                     } else {
                         boolean checkSong = false;
                         int choiceSong = Integer.parseInt(choice);
+                        int index = 0;
                         for (int i = 0; i < updatePlaylist.getPlaylistSongs().size(); i++) {
                             if (updatePlaylist.getPlaylistSongs().get(i).getId() == choiceSong) {
+                                index = i;
                                 checkSong = true;
                                 break;
                             }
                         }
-                        if (check){
-                            updatePlaylist.getPlaylistSongs().remove(choiceSong);
+                        if (check) {
+                            updatePlaylist.getPlaylistSongs().remove(index);
                         }
                         playListController.updatePlaylist(updatePlaylist);
                         System.out.println("Delete Success");
@@ -575,7 +581,7 @@ public class AdminView {
         System.out.println("4. Delete Singer");
         System.out.println("5. Back");
         System.out.println("Enter your choice");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 createSinger();
@@ -591,6 +597,8 @@ public class AdminView {
                 break;
             case 5:
                 new Navbar();
+            default:
+                manageSinger();
 
         }
     }
@@ -717,7 +725,7 @@ public class AdminView {
         System.out.println("4. Delete Band");
         System.out.println("5. Back");
         System.out.println("Enter your choice");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 createBand();
@@ -733,6 +741,8 @@ public class AdminView {
                 break;
             case 5:
                 new Navbar();
+            default:
+                manageBand();
 
         }
 
@@ -860,7 +870,7 @@ public class AdminView {
         System.out.println("4. Delete Category");
         System.out.println("5. Back");
         System.out.println("Enter your choice");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 createCategory();
@@ -876,6 +886,8 @@ public class AdminView {
                 break;
             case 5:
                 new Navbar();
+            default:
+                manageCategory();
 
         }
     }
@@ -1000,7 +1012,7 @@ public class AdminView {
         System.out.println("3. Change Role");
         System.out.println("4. Back");
         System.out.println(" Enter your choice:");
-        int choice = Config.scanner().nextInt();
+        int choice = InputMethods.getInteger();
         switch (choice) {
             case 1:
                 changeStatusUser();
@@ -1011,8 +1023,10 @@ public class AdminView {
             case 3:
                 changeRole();
                 break;
-            default:
+            case 4:
                 new Navbar();
+            default:
+                manageUser();
         }
     }
 
@@ -1146,5 +1160,343 @@ public class AdminView {
             }
 
         }
+    }
+
+    public void manageMyPlaylist() {
+        System.out.println("1. Create MyPlaylist");
+        System.out.println("2. Show MyPlaylist");
+        System.out.println("3. Update MyPlaylist");
+        System.out.println("4. Delete MyPlaylist");
+        System.out.println("5. Add Song to MyPlaylist");
+        System.out.println("6. Remove Song of MyPlaylist");
+        System.out.println("7. Back!");
+        int choice = InputMethods.getInteger();
+        switch (choice) {
+            case 1:
+                createMyPlaylist();
+                break;
+            case 2:
+                showAllMyPlaylist();
+                break;
+            case 3:
+                changeRole();
+                break;
+            case 4:
+                deleteMyPlaylist();
+                break;
+            case 5:
+                addSongToMyPlaylistBySongId();
+                break;
+            case 6:
+                removeSongOfMyPlaylist();
+                break;
+            case 7:
+                new Navbar();
+            default:
+                manageMyPlaylist();
+        }
+    }
+
+    public void createMyPlaylist() {
+        int id = 0;
+        String name = "";
+        boolean status;
+
+        if (myPlaylists.size() == 0) {
+            id = 1;
+        } else {
+            id = myPlaylists.get(myPlaylists.size() - 1).getId() + 1;
+        }
+        while (true) {
+            System.out.println("Enter name of MyPlaylist:");
+            name = Config.scanner().nextLine();
+            if (name == null || name.trim().isEmpty()) {
+                System.err.println("Please enter name of MyPlaylist");
+            } else {
+                break;
+            }
+        }
+
+        MyPlaylist newMyPlaylist = new MyPlaylist(id, name, new ArrayList<>(), user);
+        myPlaylistController.createMyPlaylist(newMyPlaylist);
+        System.out.println("Creat Success");
+        System.out.println("Enter any key to previewMenu or back to back MainMenu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) {
+            new Navbar();
+        } else {
+            manageMyPlaylist();
+        }
+    }
+
+    public List<MyPlaylist> showAllMyPlaylist() {
+        List<MyPlaylist> myList = new ArrayList<>();
+        if (myPlaylists.size() > 0) {
+            for (MyPlaylist myPlaylist : myPlaylists) {
+                if (myPlaylist.getUser().getUserName() == user.getUserName()) {
+                    myList.add(myPlaylist);
+                    System.out.println(myPlaylist);
+                }
+            }
+            System.out.println("Enter Id of MyPlaylist to show or any char to back previewMenu");
+            String back = Config.scanner().nextLine();
+            if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                manageMyPlaylist();
+            } else {
+                int choice = Integer.parseInt(back);
+                showSongOfMyPlaylist(choice);
+            }
+
+        } else {
+            System.out.println("Data empty!");
+        }
+        System.out.println("Enter any key to previewMenu or back to back MainMenu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) {
+            new Navbar();
+        } else {
+            manageMyPlaylist();
+        }
+        return myList;
+    }
+
+    public void showSongOfMyPlaylist(int choice) {
+        for (Song song : myPlaylistController.detailMyPlaylist(choice).getSongs()) {
+            System.out.println(song);
+        }
+        System.out.println("Enter Id of Song to show or any char to back previewMenu");
+        String back = Config.scanner().nextLine();
+        if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+            manageMyPlaylist();
+        } else {
+            int choose = Integer.parseInt(back);
+            new GuestView().detailSong(choose);
+        }
+
+    }
+
+    public void deleteMyPlaylist() {
+        List<MyPlaylist> myList = new ArrayList<>();
+
+        for (MyPlaylist myPlaylist : myPlaylists) {
+            if (myPlaylist.getUser().getUserName() == user.getUserName()) {
+                myList.add(myPlaylist);
+            }
+        }
+        if (myList.size() > 0) {
+            for (MyPlaylist myPlayList : myList
+            ) {
+                System.out.println(myPlayList);
+            }
+            while (true) {
+                System.out.println("Enter Id of MyPlaylist to delete or any char to back previewMenu");
+                String back = Config.scanner().nextLine();
+                if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                    playlistManage();
+                } else {
+                    int idDelete = Integer.parseInt(back);
+                    boolean check = false;
+                    for (int i = 0; i < myList.size(); i++) {
+                        if (myList.get(i).getId() == idDelete) {
+                            check = true;
+                        }
+                    }
+                    if (check) {
+                        System.out.println("Do you want to change: Y/N");
+                        String choice = Config.scanner().nextLine();
+                        if (choice.equalsIgnoreCase("y")) {
+//                        playLists.remove(idDelete);
+                            myPlaylistController.deleteMyPlaylist(idDelete);
+                            System.out.println("Delete Success");
+                            System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                            String backMenu = Config.scanner().nextLine();
+                            if (backMenu.equalsIgnoreCase("back")) {
+                                new Navbar();
+                            } else {
+                                manageMyPlaylist();
+                            }
+                        } else {
+                            deleteMyPlaylist();
+                        }
+                    } else {
+                        System.out.println("Id not found");
+                    }
+                }
+            }
+        } else {
+            System.out.println("You don't have any list.");
+            System.out.println("Enter any key to previewMenu or back to back MainMenu");
+            String backMenu = Config.scanner().nextLine();
+            if (backMenu.equalsIgnoreCase("back")) {
+                new Navbar();
+            } else {
+                manageMyPlaylist();
+            }
+        }
+    }
+
+    public void addSongToMyPlaylistBySongId() {
+        List<MyPlaylist> myList = new ArrayList<>();
+        for (MyPlaylist myPlaylist : myPlaylists) {
+            if (myPlaylist.getUser().getUserName() == user.getUserName()) {
+                myList.add(myPlaylist);
+                System.out.println(myPlaylist);
+            }
+        }
+        if (myList.size() > 0) {
+            boolean check = false;
+            boolean checkSong = false;
+            MyPlaylist updateMyPlaylist = new MyPlaylist();
+            Song updateSong = new Song();
+            int idMyPlaylist;
+            int idSong;
+            while (true) {
+                for (MyPlaylist myPlaylist : myList) {
+                    System.out.println(myPlaylist);
+                }
+                System.out.println("Enter Id of MyPlaylist which you want to add Song");
+                idMyPlaylist = Config.scanner().nextInt();
+                for (int i = 0; i < myList.size(); i++) {
+                    if (myList.get(i).getId() == idMyPlaylist) {
+                        updateMyPlaylist = myPlaylistController.detailMyPlaylist(idMyPlaylist);
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    System.out.println("Id not found! Please try again");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        manageMyPlaylist();
+                    }
+                } else {
+                    break;
+                }
+            }
+            while (true) {
+                for (Song song : songController.getListSong()) {
+                    System.out.println(song);
+                }
+                System.out.println("Enter Id of Song to add");
+                idSong = Config.scanner().nextInt();
+                for (int j = 0; j < songList.size(); j++) {
+                    if (songList.get(j).getId() == idSong) {
+                        updateSong = songController.detailSong(idSong);
+                        checkSong = true;
+                        break;
+                    }
+                }
+                if (checkSong) {
+                    break;
+                } else {
+                    System.out.println("Id not found! Please try again.");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        manageMyPlaylist();
+                    }
+                }
+            }
+            List<Song> listUpdate = updateMyPlaylist.getSongs();
+            listUpdate.add(updateSong);
+            updateMyPlaylist.setSongs(listUpdate);
+            myPlaylistController.updateMyPlaylist(updateMyPlaylist);
+            System.out.println("Add Success");
+            System.out.println("Enter any key to previewMenu or back to back MainMenu");
+            String backMenu = Config.scanner().nextLine();
+            if (backMenu.equalsIgnoreCase("back")) {
+                new Navbar();
+            } else {
+                manageMyPlaylist();
+            }
+        } else {
+            System.out.println("Data empty!");
+        }
+        System.out.println("Enter any key to previewMenu or back to back MainMenu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) {
+            new Navbar();
+        } else {
+            manageMyPlaylist();
+        }
+    }
+
+    public void removeSongOfMyPlaylist() {
+        List<MyPlaylist> myList = new ArrayList<>();
+        for (MyPlaylist myPlaylist : myPlaylists) {
+            if (myPlaylist.getUser().getUserName() == user.getUserName()) {
+                myList.add(myPlaylist);
+                System.out.println(myPlaylist);
+            }
+        }
+        if (myList.size() > 0) {
+            while (true) {
+                System.out.println("Enter Id of Playlist to delete Song or anu char to back previewMenu");
+                String back = Config.scanner().nextLine();
+                if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                    manageMyPlaylist();
+                } else {
+                    int idUpdate = Integer.parseInt(back);
+                    boolean check = false;
+                    for (int i = 0; i < myList.size(); i++) {
+                        if (myList.get(i).getId() == idUpdate) {
+                            check = true;
+                        }
+                    }
+                    if (check) {
+                        MyPlaylist updateMyPlaylist = myPlaylistController.detailMyPlaylist(idUpdate);
+                        for (Song song : updateMyPlaylist.getSongs()) {
+                            System.out.println(song);
+                        }
+                        System.out.println("Enter Id of Song to delete or anu char to back previewMenu");
+                        String choice = Config.scanner().nextLine();
+                        if (choice == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                            removeSongOfMyPlaylist();
+                        } else {
+                            boolean checkSong = false;
+                            int choiceSong = Integer.parseInt(choice);
+                            int index = 0;
+                            for (int i = 0; i < updateMyPlaylist.getSongs().size(); i++) {
+                                if (updateMyPlaylist.getSongs().get(i).getId() == choiceSong) {
+                                    index = i;
+                                    checkSong = true;
+                                    break;
+                                }
+                            }
+                            if (check) {
+                                updateMyPlaylist.getSongs().remove(index);
+                            }
+                            myPlaylistController.updateMyPlaylist(updateMyPlaylist);
+                            System.out.println("Delete Success");
+                            System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                            String backMenu = Config.scanner().nextLine();
+                            if (backMenu.equalsIgnoreCase("back")) {
+                                new Navbar();
+                            } else {
+                                manageMyPlaylist();
+                            }
+                        }
+                    } else {
+                        System.out.println("Id not found!");
+                    }
+                }
+            }
+        } else {
+            System.out.println("Data empty!");
+        }
+        System.out.println("Enter any key to previewMenu or back to back MainMenu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) {
+            new Navbar();
+        } else {
+            manageMyPlaylist();
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 package view;
 
 import config.Config;
+import config.InputMethods;
 import controller.UserController;
 import modal.Role;
 import modal.User;
@@ -25,9 +26,10 @@ public class Navbar {
                 System.out.println("3. SONG MANAGEMENT");
                 System.out.println("4. PLAYLIST MANAGEMENT");
                 System.out.println("5. SHOW ALL SONG");
-                System.out.println("6. LOGOUT");
+                System.out.println("6. MY PLAYLIST MANAGEMENT");
+                System.out.println("7. LOGOUT");
                 System.out.println("Enter your choose:");
-                int chooseMenu = Config.scanner().nextInt();
+                int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
@@ -50,8 +52,14 @@ public class Navbar {
                         new GuestView().showListSong();
                         break;
                     case 6:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new AdminView().manageMyPlaylist();
+                        break;
+                    case 7:
                         new ProfileView().logOutUser();
                         break;
+                    default:
+                        new Navbar();
 
                 }
             } else if (roleName.equalsIgnoreCase("PM")) {
@@ -62,9 +70,10 @@ public class Navbar {
                 System.out.println("4. PLAYLIST MANAGEMENT");
                 System.out.println("5. USER MANAGEMENT");
                 System.out.println("6. SHOW ALL SONG");
-                System.out.println("7. LOGOUT");
+                System.out.println("7. MY PLAYLIST MANAGEMENT");
+                System.out.println("8. LOGOUT");
                 System.out.println("Enter your choose:");
-                int chooseMenu = Config.scanner().nextInt();
+                int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
@@ -91,8 +100,14 @@ public class Navbar {
                         new GuestView().showListSong();
                         break;
                     case 7:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new AdminView().manageMyPlaylist();
+                        break;
+                    case 8:
                         new ProfileView().logOutUser();
                         break;
+                    default:
+                        new Navbar();
 
                 }
 
@@ -107,9 +122,10 @@ public class Navbar {
                 System.out.println("7. BAND MANAGEMENT");
                 System.out.println("8. SINGER MANAGEMENT");
                 System.out.println("9. CATEGORY MANAGEMENT");
-                System.out.println("10. LOGOUT");
+                System.out.println("10. MY PLAYLIST MANAGEMENT");
+                System.out.println("11. LOGOUT");
                 System.out.println("Enter your choose:");
-                int chooseMenu = Config.scanner().nextInt();
+                int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
@@ -148,8 +164,14 @@ public class Navbar {
                         new AdminView().manageCategory();
                         break;
                     case 10:
+                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
+                        new AdminView().manageMyPlaylist();
+                        break;
+                    case 11:
                         new ProfileView().logOutUser();
                         break;
+                    default:
+                        new Navbar();
                 }
             }
         } else {
@@ -165,7 +187,7 @@ public class Navbar {
             System.out.println("8. REGISTER");
             System.out.println("9. LOGIN");
             System.out.println("Enter your choose");
-            int chooseMenu = Config.scanner().nextInt();
+            int chooseMenu = InputMethods.getInteger();
             switch (chooseMenu) {
                 case 1:
                     new GuestView().showListSinger();
@@ -194,6 +216,8 @@ public class Navbar {
                 case 9:
                     new UserView().formLogin();
                     break;
+                default:
+                    new Navbar();
             }
         }
 

@@ -15,6 +15,8 @@ public class Config<T> {
     public static final String PATH_BAND ="src/database/band.csv";
     public static final String PATH_USER_LOGIN ="src/database/currentUser.csv";
     public static final String PATH_PLAYLIST ="src/database/playlist.csv";
+    public static final String PATH_MY_PLAYLIST ="src/database/myPlaylist.csv";
+
 
 
 

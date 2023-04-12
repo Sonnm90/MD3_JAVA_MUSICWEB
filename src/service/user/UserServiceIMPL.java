@@ -72,9 +72,13 @@ public class UserServiceIMPL implements IUserService{
         List<User> userLogin = new ArrayList<>();
         for (int i = 0; i < userList.size(); i++) {
             if(userList.get(i).getUserName().equals(username)&&userList.get(i).getPassword().equals(password)){
-                userLogin.add(userList.get(i));
-                new Config<User>().writeToFile(Config.PATH_USER_LOGIN, userLogin);
-                return true;
+                if (!userList.get(i).isStatus()) {
+                    userLogin.add(userList.get(i));
+                    new Config<User>().writeToFile(Config.PATH_USER_LOGIN, userLogin);
+                    return true;
+                }else {
+                    System.err.println("Account blocked!");
+                }
             }
         }
         return false;

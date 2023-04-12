@@ -108,7 +108,13 @@ public class GuestView {
                             playSong();
                             song.setNumberOfView(song.getNumberOfView() + 1);
                             songController.updateSong(song);
-                            break;
+                            System.out.println("Enter any key continue or back to back previewMenu");
+                            back = Config.scanner().nextLine();
+                            if (back.equalsIgnoreCase("back")) {
+                                new Navbar();
+                            } else {
+                                showListSong();
+                            }
 
                     }
                 }
@@ -255,7 +261,7 @@ public class GuestView {
             ) {
                 System.out.println(band);
             }
-            System.out.println("Enter Id of Singer to show details");
+            System.out.println("Enter Id of Band to show details");
             int choice = Config.scanner().nextInt();
             if (bandController.detailBand(choice) != null) {
                 System.out.println("Song of Band: " + bandController.detailBand(choice).getSongsOfBand());

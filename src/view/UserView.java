@@ -28,7 +28,7 @@ public class UserView {
             if (Config.validateName(name)){
                 break;
             } else {
-                new ResponseMessage("Please enter again");
+                System.out.println("Please enter again");
             }
         }
         while (true) {
@@ -37,7 +37,7 @@ public class UserView {
             if (Config.validateUsername(username)){
                 break;
             } else {
-                new ResponseMessage("Please enter again");
+                System.out.println("Please enter again");
             }
         }
         while (true) {
@@ -46,20 +46,21 @@ public class UserView {
             if (Config.validateEmail(email)){
                 break;
             } else {
-                new ResponseMessage("Please enter again");
+                System.out.println("Please enter again");
             }
         }
         while (true) {
             System.out.println("Enter the password: ");
              password = Config.scanner().nextLine();
-            if (Config.validatePassword(password))
+            if (Config.validatePassword(password)) {
                 break;
-            else
-                new ResponseMessage("Please enter again");
+            } else {
+                System.out.println("Please enter again");
+            }
         }
 //        System.out.println("Enter the role: ");
 //        String role = Config.scanner().nextLine();
-        String role ="admin";
+        String role ="user";
         Set<String> strRole = new HashSet<>();
         strRole.add(role);
         SignUpDTO sign = new SignUpDTO(id,name,username,email,password,strRole);

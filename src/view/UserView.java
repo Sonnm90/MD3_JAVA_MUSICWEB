@@ -28,7 +28,7 @@ public class UserView {
             if (Config.validateName(name)){
                 break;
             } else {
-                System.out.println("Please enter again");
+                System.err.println("Please enter again");
             }
         }
         while (true) {
@@ -37,7 +37,7 @@ public class UserView {
             if (Config.validateUsername(username)){
                 break;
             } else {
-                System.out.println("Please enter again");
+                System.err.println("Please enter again");
             }
         }
         while (true) {
@@ -46,7 +46,7 @@ public class UserView {
             if (Config.validateEmail(email)){
                 break;
             } else {
-                System.out.println("Please enter again");
+                System.err.println("Please enter again");
             }
         }
         while (true) {
@@ -55,7 +55,7 @@ public class UserView {
             if (Config.validatePassword(password)) {
                 break;
             } else {
-                System.out.println("Please enter again");
+                System.err.println("Please enter again");
             }
         }
 //        System.out.println("Enter the role: ");

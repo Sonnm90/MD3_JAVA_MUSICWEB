@@ -26,7 +26,8 @@ public class GuestView {
     public void showListSong() {
         for (Song song : songController.getListSong()
         ) {
-            System.out.println(song);
+            System.out.println("Id: "+song.getId()+" "+"Name: "+song.getName());
+
         }
         System.out.println("Enter Id of Song to show detail ");
         int choice = Config.scanner().nextInt();
@@ -108,7 +109,7 @@ public class GuestView {
                             playSong();
                             song.setNumberOfView(song.getNumberOfView() + 1);
                             songController.updateSong(song);
-                            System.out.println("Enter any key continue or back to back previewMenu");
+                            System.out.println("Enter back to back Menu");
                             back = Config.scanner().nextLine();
                             if (back.equalsIgnoreCase("back")) {
                                 new Navbar();
@@ -259,7 +260,7 @@ public class GuestView {
         if (bandController.getListBand().size() != 0) {
             for (Band band : bandController.getListBand()
             ) {
-                System.out.println(band);
+                System.out.println("ID: "+band.getBandId()+" "+"Name: "+band.getBandName());
             }
             System.out.println("Enter Id of Band to show details");
             int choice = Config.scanner().nextInt();
@@ -269,13 +270,25 @@ public class GuestView {
                 ) {
                     System.out.println(song);
                 }
-                System.out.println("Enter Id of Song to show or any char to back previewMenu");
-                String back = Config.scanner().nextLine();
-                if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
-                    new Navbar();
-                } else {
-                    int idShow = Integer.parseInt(back);
-                    detailSong(idShow);
+                while (true) {
+                    System.out.println("Enter Id of Song to show or any char to back previewMenu");
+                    String back = Config.scanner().nextLine();
+                    if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
+                        new Navbar();
+                    } else {
+                        boolean check = false;
+                        int idShow = Integer.parseInt(back);
+                        for (int i = 0; i < bandController.detailBand(choice).getSongsOfBand().size(); i++) {
+                            if (idShow == bandController.detailBand(choice).getSongsOfBand().get(i).getId()) {
+                                check = true;
+                                break;
+                            }
+                        }
+                        if (check) {
+                            detailSong(idShow);
+                        }
+
+                    }
                 }
             } else {
                 System.err.println("not found");
@@ -389,11 +402,12 @@ public class GuestView {
         System.out.println("TOP 10 SONG OF VIEWS:");
         if (newList.size() > 10) {
             for (int i = 0; i < 10; i++) {
-                System.out.println(newList.get(i));
+                System.out.println("Id: "+ newList.get(i).getId()+" "+"Name: "+newList.get(i).getName()+" "+"View: "+newList.get(i).getNumberOfView());
             }
         } else {
             for (Song song : newList) {
-                System.out.println(song);
+                System.out.println("Id: "+ song.getId()+" "+"Name: "+song.getName()+" "+"View: "+song.getNumberOfView());
+
             }
         }
         System.out.println("Enter Id of Song to show or any char to back previewMenu");
@@ -412,11 +426,13 @@ public class GuestView {
         System.out.println("TOP 10 SONG OF LIKES:");
         if (newList.size() > 10) {
             for (int i = 0; i < 10; i++) {
-                System.out.println(newList.get(i));
+                System.out.println("Id: "+ newList.get(i).getId()+" "+"Name: "+newList.get(i).getName()+" "+"View: "+newList.get(i).getLikeUsers().size());
+
             }
         } else {
             for (Song song : newList) {
-                System.out.println(song);
+                System.out.println("Id: "+song.getId()+" "+"Name: "+song.getName()+" "+"View: "+song.getLikeUsers().size());
+
             }
         }
         System.out.println("Enter Id of Song to show or any char to back previewMenu");

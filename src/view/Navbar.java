@@ -21,41 +21,36 @@ public class Navbar {
             }
             if (roleName.equalsIgnoreCase("user")) {
                 System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                System.out.println("1. CHANGE PROFILE");
-                System.out.println("2. CHANGE PASSWORD");
-                System.out.println("3. SONG MANAGEMENT");
-                System.out.println("4. PLAYLIST MANAGEMENT");
-                System.out.println("5. SHOW ALL SONG");
-                System.out.println("6. MY PLAYLIST MANAGEMENT");
-                System.out.println("7. LOGOUT");
+                System.out.println("1. ACCOUNT SETTING");
+                System.out.println("2. SONG MANAGEMENT");
+                System.out.println("3. PLAYLIST MANAGEMENT");
+                System.out.println("4. SHOW ALL SONG");
+                System.out.println("5. MY PLAYLIST MANAGEMENT");
+                System.out.println("6. LOGOUT");
                 System.out.println("Enter your choose:");
                 int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changeProfile();
+                        new ProfileView().manageAccount();
                         break;
                     case 2:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changePassword();
+                        new ProfileView().manageSong();
                         break;
                     case 3:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().manageSong();
+                        new ProfileView().playlistManage();
                         break;
                     case 4:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().playlistManage();
+                        new GuestView().showListSong();
                         break;
                     case 5:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new GuestView().showListSong();
-                        break;
-                    case 6:
-                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
                         new AdminView().manageMyPlaylist();
                         break;
-                    case 7:
+                    case 6:
                         new ProfileView().logOutUser();
                         break;
                     default:
@@ -64,46 +59,41 @@ public class Navbar {
                 }
             } else if (roleName.equalsIgnoreCase("PM")) {
                 System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                System.out.println("1. CHANGE PROFILE");
-                System.out.println("2. CHANGE PASSWORD");
-                System.out.println("3. SONG MANAGEMENT");
-                System.out.println("4. PLAYLIST MANAGEMENT");
-                System.out.println("5. USER MANAGEMENT");
-                System.out.println("6. SHOW ALL SONG");
-                System.out.println("7. MY PLAYLIST MANAGEMENT");
-                System.out.println("8. LOGOUT");
+                System.out.println("1. ACCOUNT SETTING");
+                System.out.println("2. SONG MANAGEMENT");
+                System.out.println("3. PLAYLIST MANAGEMENT");
+                System.out.println("4. USER MANAGEMENT");
+                System.out.println("5. SHOW ALL SONG");
+                System.out.println("6. MY PLAYLIST MANAGEMENT");
+                System.out.println("7. LOGOUT");
                 System.out.println("Enter your choose:");
                 int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changeProfile();
+                        new ProfileView().manageAccount();
                         break;
                     case 2:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changePassword();
+                        new AdminView().manageSong();
                         break;
                     case 3:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageSong();
+                        new AdminView().playlistManage();
                         break;
                     case 4:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().playlistManage();
+                        new PMView().manageUser();
                         break;
                     case 5:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new PMView().manageUser();
+                        new GuestView().showListSong();
                         break;
                     case 6:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new GuestView().showListSong();
-                        break;
-                    case 7:
-                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
                         new AdminView().manageMyPlaylist();
                         break;
-                    case 8:
+                    case 7:
                         new ProfileView().logOutUser();
                         break;
                     default:
@@ -113,61 +103,56 @@ public class Navbar {
 
             } else {
                 System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                System.out.println("1. CHANGE PROFILE");
-                System.out.println("2. CHANGE PASSWORD");
-                System.out.println("3. SONG MANAGEMENT");
-                System.out.println("4. PLAYLIST MANAGEMENT");
-                System.out.println("5. USER MANAGEMENT");
-                System.out.println("6. SHOW ALL SONG");
-                System.out.println("7. BAND MANAGEMENT");
-                System.out.println("8. SINGER MANAGEMENT");
-                System.out.println("9. CATEGORY MANAGEMENT");
-                System.out.println("10. MY PLAYLIST MANAGEMENT");
-                System.out.println("11. LOGOUT");
+                System.out.println("1. ACCOUNT SETTING");
+                System.out.println("2. SONG MANAGEMENT");
+                System.out.println("3. PLAYLIST MANAGEMENT");
+                System.out.println("4. USER MANAGEMENT");
+                System.out.println("5. SHOW ALL SONG");
+                System.out.println("6. BAND MANAGEMENT");
+                System.out.println("7. SINGER MANAGEMENT");
+                System.out.println("8. CATEGORY MANAGEMENT");
+                System.out.println("9. MY PLAYLIST MANAGEMENT");
+                System.out.println("10. LOGOUT");
                 System.out.println("Enter your choose:");
                 int chooseMenu = InputMethods.getInteger();
                 switch (chooseMenu) {
                     case 1:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changeProfile();
+                        new ProfileView().manageAccount();
                         break;
                     case 2:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new ProfileView().changePassword();
+                        new AdminView().manageSong();
                         break;
                     case 3:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageSong();
+                        new AdminView().playlistManage();
                         break;
                     case 4:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().playlistManage();
+                        new AdminView().manageUser();
                         break;
                     case 5:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageUser();
+                        new GuestView().showListSong();
                         break;
                     case 6:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new GuestView().showListSong();
+                        new AdminView().manageBand();
                         break;
                     case 7:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageBand();
+                        new AdminView().manageSinger();
                         break;
                     case 8:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageSinger();
+                        new AdminView().manageCategory();
                         break;
                     case 9:
                         System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
-                        new AdminView().manageCategory();
-                        break;
-                    case 10:
-                        System.out.println("WELCOME " + roleName + " " + user.getName().toUpperCase());
                         new AdminView().manageMyPlaylist();
                         break;
-                    case 11:
+                    case 10:
                         new ProfileView().logOutUser();
                         break;
                     default:

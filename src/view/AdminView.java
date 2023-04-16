@@ -67,7 +67,7 @@ public class AdminView {
     public List<Song> showListSong() {
         if (songList.size() > 0) {
             for (Song song : songList) {
-                System.out.println(song);
+                System.out.println(song.getId() + " " + song.getName() + " " + song.getCategory().getCategoryName() + " " + song.getSingers() + " " + song.getBands());
             }
         } else {
             System.out.println("Empty data");
@@ -84,7 +84,7 @@ public class AdminView {
 
     public void updateSong() {
         for (int i = 0; i < songList.size(); i++) {
-            System.out.println(songList.get(i));
+            System.out.println(songList.get(i).getId() + " " + songList.get(i).getName());
         }
         System.out.println("Enter Id of Song to update");
         int idUpdate = Config.scanner().nextInt();
@@ -616,10 +616,27 @@ public class AdminView {
         while (true) {
             System.out.println("Enter name of Singer");
             name = Config.scanner().nextLine();
+            boolean check = false;
             if (name == null || name.trim().isEmpty()) {
                 new ResponseMessage("Please enter name of Singer");
             } else {
-                break;
+                for (int i = 0; i < singerController.getListSinger().size(); i++) {
+                    if (singerController.getListSinger().get(i).getSingerName().equalsIgnoreCase(name)) {
+                        check = true;
+                    }
+                }
+                if (check) {
+                    System.err.println("Singer existed!");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        manageSinger();
+                    }
+                } else {
+                    break;
+                }
             }
         }
         Singer singer = new Singer(id, name, creatListSong);
@@ -761,10 +778,27 @@ public class AdminView {
         while (true) {
             System.out.println("Enter name of Band");
             name = Config.scanner().nextLine();
+            boolean check = false;
             if (name == null || name.trim().isEmpty()) {
                 new ResponseMessage("Please enter name of Band");
             } else {
-                break;
+                for (int i = 0; i < bandController.getListBand().size(); i++) {
+                    if (bandController.getListBand().get(i).getBandName().equalsIgnoreCase(name)) {
+                        check = true;
+                    }
+                }
+                if (check) {
+                    System.err.println("Band existed!");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        manageBand();
+                    }
+                } else {
+                    break;
+                }
             }
         }
         Band newBand = new Band(id, name, creatListSong);
@@ -904,10 +938,27 @@ public class AdminView {
         while (true) {
             System.out.println("Enter name of Category");
             name = Config.scanner().nextLine();
+            boolean check = false;
             if (name == null || name.trim().isEmpty()) {
                 new ResponseMessage("Please enter name of Category");
             } else {
-                break;
+                for (int i = 0; i < categoryController.getListCategory().size(); i++) {
+                    if (categoryController.getListCategory().get(i).getCategoryName().equalsIgnoreCase(name)) {
+                        check = true;
+                    }
+                }
+                if (check) {
+                    System.err.println("Category existed!");
+                    System.out.println("Enter any key to previewMenu or back to back MainMenu");
+                    String backMenu = Config.scanner().nextLine();
+                    if (backMenu.equalsIgnoreCase("back")) {
+                        new Navbar();
+                    } else {
+                        manageCategory();
+                    }
+                } else {
+                    break;
+                }
             }
         }
         Category category = new Category(id, name);
@@ -942,14 +993,24 @@ public class AdminView {
                 if (check) {
                     Category updateCategory = categoryController.detailCategory(idUpdate);
                     while (true) {
-                        System.out.println("Enter name of Singer to update");
+                        System.out.println("Enter name of Category to update");
                         String name = Config.scanner().nextLine();
                         if (name.length() != 0) {
+                            for (Song song : songController.getListSong()
+                            ) {
+                                if (song.getCategory().getCategoryName().equalsIgnoreCase(updateCategory.getCategoryName())) {
+                                    Category updateCategorySong = song.getCategory();
+                                    updateCategorySong.setCategoryName(name);
+                                    song.setCategory(updateCategorySong);
+                                    songController.updateSong(song);
+                                }
+                            }
                             updateCategory.setCategoryName(name);
                             break;
                         }
                     }
                     categoryController.updateCategory(updateCategory);
+
                     System.out.println("Update Success");
                     System.out.println("Enter any key to previewMenu or back to back MainMenu");
                     String backMenu = Config.scanner().nextLine();
@@ -1033,7 +1094,7 @@ public class AdminView {
     public void changeStatusUser() {
         for (User user : userList) {
             if (!String.valueOf(user.getRoles()).equalsIgnoreCase("admin")) {
-                System.out.println(user.getUserName() + "  " + user.isStatus());
+                System.out.println(user.getId() + " " + user.getUserName() + "  " + user.isStatus());
             }
         }
         while (true) {
@@ -1042,12 +1103,22 @@ public class AdminView {
             if (back == null || back.trim().isEmpty() || Character.isLetter(back.charAt(0))) {
                 manageUser();
             } else {
+
                 int idBlock = Integer.parseInt(back);
                 if (userController.detailUser(idBlock) == null) {
+                    System.out.println("1");
                     System.out.println("Id not found! Try again");
                 } else {
                     User blockUser = userController.detailUser(idBlock);
-                    if (blockUser != null || String.valueOf(blockUser.getRoles()).equalsIgnoreCase("admin")) {
+                    String roleName = "";
+                    for (Role role : blockUser.getRoles()
+                    ) {
+                        roleName = String.valueOf(role.getName());
+                    }
+                    if (roleName.equalsIgnoreCase("admin")) {
+
+                        System.out.println(blockUser);
+                        System.out.println("2");
                         System.out.println("Id not found! Please try again!");
                     } else {
                         System.out.println("Do you want to change: Y/N");
@@ -1116,7 +1187,7 @@ public class AdminView {
     public void changeRole() {
         for (User user : userList) {
             if (!String.valueOf(user.getRoles()).equalsIgnoreCase("admin")) {
-                System.out.println(user.getUserName() + "  " + user.getId() + " " + user.getRoles());
+                System.out.println(user.getId() + " " + user.getUserName() + "  " + user.getRoles());
             }
         }
         while (true) {

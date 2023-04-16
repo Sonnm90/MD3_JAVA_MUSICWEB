@@ -29,7 +29,28 @@ public class ProfileView {
 //    List<Category> categoryList = new Config<Category>().readFromFile(Config.PATH_CATEGORY);
 //    List<PlayList> playLists = new Config<PlayList>().readFromFile(Config.PATH_PLAYLIST);
 
-
+public void manageAccount(){
+    System.out.println("1. Show profile");
+    System.out.println("2. Change profile");
+    System.out.println("3. Change password");
+    System.out.println("4. Back");
+    System.out.println("Enter your choice");
+    int choice = InputMethods.getInteger();
+    switch (choice) {
+        case 1:
+            showProfile();
+            break;
+        case 2:
+            changeProfile();
+            break;
+        case 3:
+            changePassword();
+            break;
+        default:
+            new Navbar();
+            break;
+    }
+}
     public void changeProfile() {
 //        User user = userController.getUserLogin();
         String name = "";
@@ -67,10 +88,12 @@ public class ProfileView {
             new Config<User>().writeToFile(Config.PATH_USER_LOGIN, userLogin);
             System.out.println("Change success!");
             while (true) {
-                System.out.println("Enter back to back MainMenu");
+                System.out.println("Enter any key to back previewMenu or back to back MainMenu");
                 String backMenu = Config.scanner().nextLine();
                 if (backMenu.equalsIgnoreCase("back")) {
                     new Navbar();
+                } else {
+                    manageAccount();
                 }
             }
         } else {
@@ -83,6 +106,21 @@ public class ProfileView {
             }
         }
 
+    }
+    public void showProfile(){
+        System.out.println("ACCOUNT INFORMATION: ");
+        System.out.println("Name: "+user.getName());
+        System.out.println("UserName: "+user.getUserName());
+        System.out.println("Email: "+user.getEmail());
+        while (true) {
+            System.out.println("Enter any key to previewMenu or back to back MainMenu");
+            String backMenu = Config.scanner().nextLine();
+            if (backMenu.equalsIgnoreCase("back")) {
+                new Navbar();
+            } else {
+                manageAccount();
+            }
+        }
     }
 
     public void changePassword() {
@@ -121,10 +159,12 @@ public class ProfileView {
             new Config<User>().writeToFile(Config.PATH_USER_LOGIN, userLogin);
             new ResponseMessage("Change success!");
             while (true) {
-                System.out.println("Enter back to back MainMenu");
+                System.out.println("Enter any key to previewMenu or back to back MainMenu");
                 String backMenu = Config.scanner().nextLine();
                 if (backMenu.equalsIgnoreCase("back")) {
                     new Navbar();
+                } else {
+                    manageAccount();
                 }
             }
         } else {
